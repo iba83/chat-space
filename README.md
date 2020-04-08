@@ -1,7 +1,7 @@
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|username|string|null: false, index: true|
+|name|string|null: false, index: true|
 |email|string|null: false, unique: true|
 |password|string|null: false|
 ### Association
@@ -12,7 +12,7 @@
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|groupname|string|null false, index: true|
+|name|string|null false, index: true|
 ### Association
 - has_many :messages
 - has_many :users_groups
