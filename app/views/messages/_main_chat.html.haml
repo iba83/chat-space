@@ -1,0 +1,32 @@
+.wrapper
+  .chatMain
+    .chatMain__groupInfo
+      .chatMain__groupInfo__leftBox
+        .chatMain__groupInfo__leftBox--name
+          test
+        .chatMain__groupInfo__leftBox--member
+          Member : masa
+      = link_to "Edit", "#", class: "chatMain__groupInfo--edit" 
+    .chatMain__messageList
+      .chatMain__messageList__index
+        .chatMain__messageList__index--name
+          masa
+        .chatMain__messageList__index--date
+          2019/11/20(Wed) 17:43:01
+      .chatMain__messageList--message
+        おはよう！
+      .chatMain__messageList__index
+        .chatMain__messageList__index--name
+          ルーマニア
+        .chatMain__messageList__index--date
+          2019/11/20(Wed) 17:43:34
+      .chatMain__messageList--message
+        今日は夜から雨
+    .chatMain__messageForm
+      .chatMain__messageForm__imageFile
+        %input{placeholder: "type a message", class: "chatMain__messageForm__imageFile--message"}
+          %label{class: "chatMain__messageForm__imageFile--image"}
+            = icon("far", "image")
+            %input{type: "file", class: "chatMain__messageForm__imageFile--image--file"}
+      %input{type: "submit", class: "chatMain__messageForm--submit", value: "Send"}
+
