@@ -3,30 +3,19 @@
     .chatMain__groupInfo
       .chatMain__groupInfo__leftBox
         .chatMain__groupInfo__leftBox--name
-          test
+          = @group.name
         .chatMain__groupInfo__leftBox--member
-          Member : masa
-      = link_to "Edit", edit_group_path(current_user), class: "chatMain__groupInfo--edit" 
+          Member : 
+          - @group.users.each do |user|
+            = user.name
+      = link_to "Edit", edit_group_path(@group), class: "chatMain__groupInfo--edit" 
     .chatMain__messageList
-      .chatMain__messageList__index
-        .chatMain__messageList__index--name
-          masa
-        .chatMain__messageList__index--date
-          2019/11/20(Wed) 17:43:01
-      .chatMain__messageList--message
-        おはよう！
-      .chatMain__messageList__index
-        .chatMain__messageList__index--name
-          ルーマニア
-        .chatMain__messageList__index--date
-          2019/11/20(Wed) 17:43:34
-      .chatMain__messageList--message
-        今日は夜から雨
+      = render @messages
     .chatMain__messageForm
-      .chatMain__messageForm__imageFile
-        %input{placeholder: "type a message", class: "chatMain__messageForm__imageFile--message"}
-          %label{class: "chatMain__messageForm__imageFile--image"}
+      = form_for [@group, @message], html: {class: "chatMain__messageForm__imageFile"} do |f|
+        .chatMain__messageForm__imageFile__form
+          = f.text_field :content, class: "chatMain__messageForm__imageFile__form--message", placeholder: "type a message" 
+          = f.label :image, class: "chatMain__messageForm__imageFile__form--image" do
             = icon("far", "image")
-            %input{type: "file", class: "chatMain__messageForm__imageFile--image--file"}
-      %input{type: "submit", class: "chatMain__messageForm--submit", value: "Send"}
-
+            = f.file_field :image, class: "chatMain__messageForm__imageFile__form--image--file"
+        = f.submit "Send", class: "chatMain__messageForm__imageFile--submit"

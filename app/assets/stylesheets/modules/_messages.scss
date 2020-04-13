@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+*::-webkit-scrollbar {
+  display: none;
+}
 
 .wrapper {
   display: flex;
@@ -11,10 +14,10 @@
   width: 300px;
   color: $whiteColor;
   font-weight: bold;
+  position: fixed;  
   &__userName {
     height: $headerSize;
     background-color: #253141;
-    position: fixed;
     z-index: 10;
     display: flex;
     align-items: center;
@@ -45,10 +48,10 @@
   &__groupList {
     height: calc(100vh - 100px);
     background-color: #2f3e51;
-    margin-top: $headerSize;
     padding: 0 20px;
+    overflow-y: scroll;
     &__topItems {
-      padding: 20px 0 40px;
+      padding: 20px 0px;
       &--name {
         font-size: 15px;
         margin-bottom: 5px;
@@ -57,6 +60,7 @@
       }
       &--message {
         font-size: 11px;
+        padding-bottom: 40px;
       }
     }
   }
@@ -65,6 +69,7 @@
 .chatMain {
   height: 100vh;
   width: calc(100vw - 300px);
+  margin-left: 300px;
   &__groupInfo {
     height: $headerSize;
     width: calc(100vw - 300px);
@@ -102,6 +107,7 @@
     background-color: #fafafa;
     margin-top: $headerSize;
     padding: 35px 0 0 40px;
+    overflow-y:auto;
     &__index {
       display: flex;
       &--name {
@@ -119,43 +125,53 @@
       padding: 12px 0 46px;
       color: #434a54;
       font-size: 14px;
+      &--img {
+        height: 300px;
+        width: 300px;
+      }
     }
   }
   &__messageForm {
     height: 90px;
+    width: 100%;
     background-color: #d2d2d2;
     display: flex;
     align-items: center;
-    padding: 0 40px;
     &__imageFile {
       height: 50px;
-      width: calc(100% - 115px);
+      width: 100%;
       display: flex;
       align-items: center;
-      position: relative;
-      &--message {
-        height: 50px;
+      padding: 0 40px;
+      &__form {
+        display: flex;
+        position: relative;
         width: 100%;
-        border: none;
-        padding: 0 10px;
+        &--message {
+          height: 50px;
+          width: 100%;
+          border: none;
+          padding: 10px 40px 10px 10px;
+        }
+        &--image {
+          margin-left: 10px;
+          font-size: 23px;
+          line-height: 50px;
+          position: absolute;
+          right: 10px;
+          &--file {
+            display: none;
+          }  
+        }
       }
-      &--image {
-        margin-left: 10px;
-        font-size: 23px;
-        position: absolute;
-        right: 10px;
-        &--file {
-          display: none;
-        }  
-      }  
-    }
-    &--submit {
-      display: block;
-      height: 50px;
-      width: 100px;
-      color: $whiteColor;
-      background-color: $blueColor;
-      margin-left: 15px;
+      &--submit {
+        display: block;
+        height: 50px;
+        width: 100px;
+        color: $whiteColor;
+        background-color: $blueColor;
+        margin-left: 15px;
+      }
     }
   }
 }
