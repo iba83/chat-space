@@ -1,0 +1,9 @@
+.chatMain__messageList__index
+  .chatMain__messageList__index--name
+    = message.user.name
+  .chatMain__messageList__index--date
+    = message.updated_at.strftime("%Y年%m月%d日 %H時%M分")
+.chatMain__messageList--message
+  - if message.content.present?
+    = message.content
+  = image_tag message.image.url,class: "chatMain__messageList--message--img" if message.image.present?
