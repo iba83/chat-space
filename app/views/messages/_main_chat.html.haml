@@ -18,4 +18,4 @@
           = f.label :image, class: "chatMain__messageForm__imageFile__form--image" do
             = icon("far", "image")
             = f.file_field :image, class: "chatMain__messageForm__imageFile__form--image--file"
-        = f.submit "Send", class: "chatMain__messageForm__imageFile--submit"
+        = f.submit "Send", id: "form-submit", class: "chatMain__messageForm__imageFile--submit"
