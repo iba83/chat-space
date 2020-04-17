@@ -1,33 +1,37 @@
 $(function(){
-
+  
   function buildHTML(message){
     if (message.image){
       var html =
-        `<div class="chatMain__messageList__index">
-        <div class="chatMain__messageList__index--name">
-          ${message.user_name}
-        </div>
-        <div class="chatMain__messageList__index--date">
-          ${message.created_at}
-        </div>
-        </div>
-        <div class="chatMain__messageList--message">
-          ${message.content}
-          <img class="chatMain__messageList--message--img" src="${message.image}">
+        `<div class="chatMain__messageList__index" data-message-id=${message.id}>
+          <div class="chatMain__messageList__index--data">
+            <div class="chatMain__messageList__index--data--name">
+              ${message.user_name}
+            </div>
+            <div class="chatMain__messageList__index--data--date">
+              ${message.created_at}
+            </div>
+          </div>
+          <div class="chatMain__messageList__index--message">
+            ${message.content}
+            <img class="chatMain__messageList__index--message--img" src="${message.image}">
+          </div>
         </div>`
       return html;
     } else {
       var html =
-        `<div class="chatMain__messageList__index">
-          <div class="chatMain__messageList__index--name">
-            ${message.user_name}
+        `<div class="chatMain__messageList__index" data-message-id=${message.id}>
+          <div class="chatMain__messageList__index--data">
+            <div class="chatMain__messageList__index--data--name">
+              ${message.user_name}
+            </div>
+            <div class="chatMain__messageList__index--data--date">
+              ${message.created_at}
+            </div>
           </div>
-          <div class="chatMain__messageList__index--date">
-            ${message.created_at}
+          <div class="chatMain__messageList__index--message">
+            ${message.content}
           </div>
-        </div>
-        <div class="chatMain__messageList--message">
-          ${message.content}
         </div>`
       return html;
     }
@@ -55,4 +59,30 @@ $(function(){
       alert("メッセージ送信に失敗しました");
     })
   });
+  var reloadMessages = function() {
+    var last_message_id = $('.chatMain__messageList__index:last').data("message-id");
+    console.log(last_message_id)
+    $.ajax({
+      url: "api/messages",
+      type: "get",
+      dataType: "json",
+      data: { id: last_message_id }
+    })
+    .done(function(messages) {
+      if (messages.length !== 0){
+        var insertHTML = '';
+        $.each(messages, function(i, message){
+          insertHTML += buildHTML(message)
+        });
+        $('.chatMain__messageList').append(insertHTML);
+        $('.chatMain__messageList').animate({ scrollTop: $('.chatMain__messageList')[0].scrollHeight});
+      }
+    })
+    .fail(function(){
+      alert("error");
+    });
+  };
+  if (document.location.href.match(/\/groups\/\d+\/messages/)){
+  setInterval(reloadMessages, 7000);
+  }
 });
