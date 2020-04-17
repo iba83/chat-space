@@ -109,26 +109,30 @@
     padding: 35px 0 0 40px;
     overflow-y:auto;
     &__index {
-      display: flex;
-      &--name {
-        color: $chatNameColor;
-        font-size: 16px;
-        font-weight: bold;
-        padding-right: 10px;
+      &--data {
+        display: flex;
+        line-height: 16px;
+        &--name {
+          color: $chatNameColor;
+          font-size: 16px;
+          font-weight: bold;
+          padding-right: 12px;
+        }
+        &--date {
+          color: $grayColor;
+          font-size: 12px;
+        }
       }
-      &--date {
-        color: $grayColor;
-        font-size: 12px;
-      }
-    }
-    &--message {
-      padding: 12px 0 46px;
-      color: #434a54;
-      font-size: 14px;
-      &--img {
-        height: 300px;
-        width: 300px;
-        display: block;
+      &--message {
+        padding: 12px 0 46px;
+        color: #434a54;
+        font-size: 14px;
+        &--img {
+          padding-top: 5px;
+          height: 300px;
+          width: 300px;
+          display: block;
+        }
       }
     }
   }
